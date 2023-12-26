@@ -1,0 +1,24 @@
+@use '../configs/colors' as *;
+@use '../functions/is-map' as *;
+
+@each $name, $value in $colors {
+  @if(is-map($value)) {
+    @each $shade, $hue in $value {
+      .border-#{$name}-#{$shade} {
+        border: 1px solid $hue;
+      }
+    }
+  }
+
+  @else {
+    .border-#{$name} {
+      border: 1px solid $value;
+    }
+  }
+}
+.border-rounded-10 {
+  border-radius: 10px;
+}
+.border-rounded-5 {
+  border-radius: 5px;
+}

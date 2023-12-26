@@ -1,0 +1,54 @@
+$colors: (
+  'white': rgb(255 255 255),
+  'black': rgb(0 0 0),
+  'transparent': 'transparent',
+  'gray': (
+    50:rgb(249 250 251),
+    100:rgb(243 244 246),
+    200:rgb(229 231 235),
+    300:rgb(209 213 219),
+    400:rgb(156 163 175),
+    500:rgb(107 114 128),
+    600:rgb(75 85 99),
+    700:rgb(55 65 81),
+    800:rgb(31 41 55),
+    900:rgb(17 24 39),
+    950:rgb(3 7 18)
+  ),
+  'sunset': (
+    50: rgb(255 251 235),
+    100: rgb(254 243 199),
+    200: rgb(253 230 138),
+    300: rgb(252 211 77),
+    400: rgb(251 191 36),
+    500: rgb(245 158 11),
+    600: rgb(217 119 6),
+    700: rgb(180 83 9),
+    800: rgb(146 64 14),
+    900: rgb(120 53 15),
+    950: rgb(69 26 3)
+  )
+)
+
+// bg-gray-50 background-color: rgb(249 250 251);
+// bg-gray-100 background-color: rgb(243 244 246);
+// bg-gray-200 background-color: rgb(229 231 235);
+// bg-gray-300 background-color: rgb(209 213 219);
+// bg-gray-400 background-color: rgb(156 163 175);
+// bg-gray-500 background-color: rgb(107 114 128);
+// bg-gray-600 background-color: rgb(75 85 99);
+// bg-gray-700 background-color: rgb(55 65 81);
+// bg-gray-800 background-color: rgb(31 41 55);
+// bg-gray-900 background-color: rgb(17 24 39);
+// bg-gray-950 background-color: rgb(3 7 18);
+// bg-amber-50 background-color: rgb(255 251 235);
+// bg-amber-100 background-color: rgb(254 243 199);
+// bg-amber-200 background-color: rgb(253 230 138);
+// bg-amber-300 background-color: rgb(252 211 77);
+// bg-amber-400 background-color: rgb(251 191 36);
+// bg-amber-500 background-color: rgb(245 158 11);
+// bg-amber-600 background-color: rgb(217 119 6);
+// bg-amber-700 background-color: rgb(180 83 9);
+// bg-amber-800 background-color: rgb(146 64 14);
+// bg-amber-900 background-color: rgb(120 53 15);
+// bg-amber-950 background-color: rgb(69 26 3);
