@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import Cell from '@/components/draggable/cell.vue'
 import DragItem from '@/components/draggable/drag-item.vue'
+
 import { Button, InputText, InputNumber, InputSelect, Option } from '@/components'
 
 const cols = ref<number>(5)
@@ -75,18 +77,21 @@ const cellNum = computed(() => cols.value * rows.value)
 			</div>
 
 			<div :class="layoutClasses">
-				<div v-for="cell in cellNum" :key="cell" class="grid-cell"></div>
+				<Cell 
+					v-for="cell in cellNum" 
+					:key="cell"
+					:id="`cell-${cell}`"></Cell>
 			</div>
 		</div>
 		
 		<div class="bg-white border-gray-300 position-sticky right-0 top-0">
 			<h1 class="text-regular-24 py-16 px-24">Components</h1>
-			<div class="py-16 px-24">
-				<DragItem>
+			<div class="d-grid gap-8 py-16 px-24">
+				<DragItem id="sample-1">
 					<Button text="Button" />
 				</DragItem>
 				
-				<DragItem>
+				<DragItem id="sample-2">
 					<InputText id="sample" label="Name" />
 				</DragItem>
 			</div>
@@ -97,8 +102,5 @@ const cellNum = computed(() => cols.value * rows.value)
 <style scoped>
 .grid-layout {
 	max-height: 90rem;
-}
-.grid-cell {
-	border: 1px dotted #bababa;
 }
 </style>
