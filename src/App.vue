@@ -3,7 +3,12 @@ import { ref, computed } from 'vue'
 import Cell from '@/components/draggable/cell.vue'
 import DragItem from '@/components/draggable/drag-item.vue'
 
-import { Button, InputText, InputNumber, InputSelect, Option } from '@/components'
+import { 
+	Button, 
+	InputText, 
+	InputNumber, 
+	InputSelect, 
+	Option } from '@/components'
 
 const cols = ref<number>(5)
 const rows = ref<number>(5)
@@ -31,6 +36,8 @@ const gaps = ref<Option[]>([
   64,
   68
 ])
+
+const cellEditOpen = ref<boolean>(false)
 
 const layoutClasses = computed(() => {
 	return {
@@ -76,12 +83,13 @@ const cellNum = computed(() => cols.value * rows.value)
 					v-model="rowGap" />
 			</div>
 
-			<div :class="layoutClasses">
+			<div :class="layoutClasses" id="cells">
 				<Cell 
 					v-for="cell in cellNum" 
 					:key="cell"
 					:id="`cell-${cell}`"></Cell>
 			</div>
+
 		</div>
 		
 		<div class="bg-white border-gray-300 position-sticky right-0 top-0">

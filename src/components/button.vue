@@ -4,14 +4,16 @@ const props = withDefaults(defineProps<{
 }>(), {
 
 })
+
+defineEmits<{
+  (event: 'click', value: Event):void
+}>()
 </script>
 
 <template>
-  <button class="bg-sunset-500 text-white border-rounded-5 px-16 py-8">
+  <button 
+    class="bg-sunset-500 text-white border-rounded-5 px-16 py-8" 
+    @click="$emit('click', $event)">
     {{ text }}
   </button>
 </template>
-
-<style lang="scss" scoped>
-
-</style>
