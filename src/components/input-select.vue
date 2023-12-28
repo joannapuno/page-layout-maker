@@ -1,21 +1,21 @@
 <script setup lang="ts">
   export interface Option {
     text?: string
-    value: string
+    value: string | number
   }
 
 
   withDefaults(defineProps<{
     label: string
     id: string
-    modelValue?: string
+    modelValue?: string | number
     options?: Option[]
   }>(), {
     modelValue: undefined
   })
 
   const emit = defineEmits<{
-    (event: 'update:modelValue', value: string): void
+    (event: 'update:modelValue', value: string | number): void
   }>()
 
   const handleInput = (evt: Event) => {

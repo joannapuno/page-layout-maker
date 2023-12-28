@@ -9,11 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "prismjs": "^1.29.0",
     "vue": "^3.3.11",
     "vue3-click-away": "^1.2.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
+    "prettier": "^3.1.1",
     "sass": "^1.69.5",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",

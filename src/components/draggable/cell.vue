@@ -45,7 +45,6 @@ const rowSpan = ref<number>(1)
 const cellClasses = computed(() => {
   return {
     'grid-cell': true,
-    'position-relative': true,
     'bg-sunset-50': isDraggingOver.value || openPopover.value,
     'has-content': hasContent.value,
     [`grid-col-span-${colSpan.value}`]: true,
@@ -54,38 +53,18 @@ const cellClasses = computed(() => {
 })
 </script>
 <template>
-  <div
+  <div 
     :id="id"
-    :class="cellClasses">
-
-    <div 
-      class="h-100"
-      @dragover.prevent
-      @dragenter="handleDragEnter"
-      @dragleave="isDraggingOver = false"
-      @drop="handleDrop"
-      @click="openPopover = true">
-
-      <div ref="wrapper"></div>
-    </div>
-
-    <Popover title="Edit Cell" v-model:open="openPopover">
-
-      <div class="d-flex flex-column gap-8">
-        <InputNumber id="col-span" label="Column Span" v-model="colSpan" :max="12" />
-        <InputNumber id="row-span" label="Row Span" v-model="rowSpan" :max="12" />
-      </div>
-
-      <template #buttons>
-        <Button text="Done" @click="openPopover = false" />
-      </template>
-    </Popover>
-    </div>
-
-
+    :class="cellClasses"
+    ref="wrapper"
+    @dragover.prevent
+    @dragenter="handleDragEnter"
+    @dragleave="isDraggingOver = false"
+    @drop="handleDrop">
+  </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .grid-cell {
   cursor: pointer;
   &:not(.has-content) {
