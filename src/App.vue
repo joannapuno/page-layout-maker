@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from 'vue'
+import { ref, computed, onMounted, nextTick, onUpdated, Ref } from 'vue'
 
-import Prism from 'prismjs'
-import 'prismjs/components/prism-markup'
-import 'prismjs/themes/prism.css'
-import * as prettier from "prettier"
-import parserHtml from 'prettier/plugins/html'
+
 
 import { 
 	Cell,
@@ -15,18 +11,14 @@ import {
 	Option,
 	Modal,
 	Layout,
-	ComponentsPanel } from '@/components'
+	ComponentsPanel,
+	GenerateCodeModal } from '@/components'
 
 const cellNum = ref<number>(1)
 const cols = ref<number>(12)
 const rows = ref<number>(1)
 const colGap = ref<number>(0)
 const rowGap = ref<number>(0)
-const gridLayout = ref<HTMLElement | null>(null)
-const codeBlock = ref<HTMLElement | null>(null)
-const generatedCode = ref<String>()
-const codeModalOpen = ref<boolean>(false)
-
 const gaps = ref<Option[]>([
 	0,
   2,
@@ -52,62 +44,9 @@ const gaps = ref<Option[]>([
 // Todo
 // const displayGrid = computed(() => cols.value * rows.value)
 
-
-const formatCode = async () => {
-	try {
-		generatedCode.value = await prettier.format(generatedCode.value, { 
-			semi: false, 
-			parser: "html", 
-			plugins:[parserHtml] 
-		});
-	} catch(err) {
-		console.error(err)
-	} finally {
-		nextTick(() => {
-			if(codeBlock.value)
-			Prism.highlightElement(codeBlock.value)
-		})
-	}
-}
-
-const generateCode = () => {
-	if(!gridLayout.value) return
-	generatedCode.value = gridLayout.value.gridLayout.outerHTML
-
-	codeModalOpen.value = true
-	formatCode()
-}
-
-const copyCode = async () => {
-	if(!navigator.clipboard) return
-	try {
-		await navigator.clipboard.writeText(generatedCode.value)
-		console.log('copied!')
-	} catch (err) {
-		console.error('Failed to copy', err)
-	}
-}
 </script>
 
 <template>
-	<Button text="Generate Code" @click="generateCode" />
-	<Modal title="Generated Code" v-model:open="codeModalOpen">
-		<div>
-			<div>
-				<label for="generated-code">
-					<pre class="language-markup">
-						<code ref="codeBlock" class="language-markup">{{ generatedCode }}</code>
-					</pre>
-				</label>
-			</div>
-		</div>
-
-		<template #buttons>
-			<Button text="Cancel" @click="codeModalOpen = false" />
-			<Button text="Copy" @click="copyCode" />
-		</template>
-	</Modal>
-
 	<div class="container gap-16">
 		<ComponentsPanel />
 
@@ -144,18 +83,21 @@ const copyCode = async () => {
 			</div>
 
 			<Layout 
-				ref="gridLayout"
+				id="grid-layout"
 				:columns="cols"
 				:rows="rows"
 				:col-gap="colGap"
 				:row-gap="rowGap">
-
 				<Cell 
 					v-for="cell in cellNum" 
 					:key="cell"
 					:id="`cell-${cell}`"></Cell>
+			</Layout>
+		</div>
+	</div>
 
-					<!-- For displaying grid lines -->
+
+<!-- For displaying grid lines -->
 					<!-- <Layout 
 						class="display"
 						:columns="cols"
@@ -167,12 +109,6 @@ const copyCode = async () => {
 							:key="cell"
 							:id="`cell-${cell}`"></Cell>
 					</Layout> -->
-			</Layout>
-		</div>
-	</div>
-
-
-
 
 	    <!-- TODO -->
     <!-- <Popover title="Edit Cell" v-model:open="openPopover">
@@ -185,6 +121,8 @@ const copyCode = async () => {
         <Button text="Done" @click="openPopover = false" />
       </template>
     </Popover> -->
+
+	<GenerateCodeModal />
 </template>
 
 <style lang="scss">
@@ -198,11 +136,11 @@ const copyCode = async () => {
 }
 
 .display {
-		position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: -1;
-    background: transparent;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	background: transparent;
 }
 </style>

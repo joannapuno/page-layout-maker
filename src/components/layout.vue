@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, computed } from 'vue'
+  import { ref, computed, Ref } from 'vue'
 
   const props = withDefaults(defineProps<{
     columns?: number
@@ -26,12 +26,10 @@
       [`row-gap-${props.rowGap}`]: true
     }
   })
-
-  defineExpose({gridLayout})
 </script>
 
 <template>
-  <div ref="gridLayout" :class="layoutClasses">
+  <div :class="layoutClasses">
     <slot />
   </div>
 </template>
