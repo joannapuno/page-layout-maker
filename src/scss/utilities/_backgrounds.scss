@@ -1,0 +1,17 @@
+@use '../configs/colors' as *;
+@use '../functions/is-map' as *;
+
+@each $name, $value in $colors {
+  @if(is-map($value)) {
+    @each $shade, $hue in $value {
+      .bg-#{$name}-#{$shade} {
+        background-color: $hue;
+      }
+    }
+  }
+  @else {
+    .bg-#{$name} {
+      background-color: $value;
+    }
+  }
+}

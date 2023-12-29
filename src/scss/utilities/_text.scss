@@ -1,0 +1,39 @@
+@use '../configs/text' as *;
+@use '../configs/colors' as *;
+@use '../functions/is-map' as *;
+@use '../configs/variables' as *;
+
+@each $name, $value in $colors {
+  @if(is-map($value)) {
+    @each $shade, $hue in $value {
+      .text-#{$name}-#{$shade} {
+        color: $hue;
+      }
+    }
+  }
+
+  @else {
+    .text-#{$name} {
+      color: $value;
+    }
+  }
+}
+
+@each $name, $value in $font-sizes {
+  @each $weightName, $weight in $font-weights {
+    .text-#{$weightName} {
+      font-weight: $weight;
+    }
+    .text-#{$weightName}-#{$name} {
+      font-size: $value;
+      font-weight: $weight;
+    }
+  }
+}
+
+.label-r-14 {
+  font-size: 1.4rem;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+}

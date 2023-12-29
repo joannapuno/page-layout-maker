@@ -1,1 +1,27 @@
-@import './normalize.scss';
+@use './normalize.scss' as *;
+@use './utilities/utils.scss' as *;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap');
+
+:root {
+  --font-family: 'Open Sans', sans-serif
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: 1.6rem;
+  background: rgb(252, 211, 77);
+  background: linear-gradient(
+    218deg, 
+    rgba(252, 211, 77, 1) 0%, 
+    rgba(245, 158, 11, 1) 47%, 
+    rgba(252, 165, 165, 1) 100%
+  );
+}
+
+button {
+  cursor: pointer;
+}

@@ -1,0 +1,15 @@
+@use '../configs/colors' as *;
+@use '../functions/is-map' as *;
+
+:root {
+  @each $name, $value in $colors {
+    @if(is-map($value)) {
+      @each $shade, $hue in $value {
+        --#{$name}-#{$shade}: #{$hue};
+      }
+    }
+    @else {
+      --#{$name}: #{$value};
+    }
+  }
+}
