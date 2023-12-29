@@ -88,8 +88,8 @@ onMounted(() => {
 	<div class="container gap-16">
 		<ComponentsPanel />
 
-		<div class="p-24">
-			<div class="grid-5 align-items-end gap-8 mb-24">
+		<div class="d-flex flex-column gap-24 p-16">
+			<div class="align-items-end bg-white border-rounded-5 gap-8 grid-5 position-sticky top-0 z1 p-24">
 				<Button text="Add Cell" @click="addCell" />
 
 				<InputNumber
@@ -117,20 +117,22 @@ onMounted(() => {
 					v-model="rowGap" />
 			</div>
 
-			<Layout 
-				id="grid-layout"
-				:columns="cols"
-				:rows="rows"
-				:col-gap="colGap"
-				:row-gap="rowGap">
-				<Cell 
-					v-for="(cell, index) in cells" 
-					:key="index"
-					:id="`cell-${index}`"
-					:col-span="cell.colSpan ?? 1"
-					:row-span="cell.rowSpan ?? 1"
-					@click="editCell(index)" />
-			</Layout>
+			<div class="bg-white border-rounded-5 h-100 position-relative p-24">
+				<Layout 
+					id="grid-layout"
+					:columns="cols"
+					:rows="rows"
+					:col-gap="colGap"
+					:row-gap="rowGap">
+					<Cell 
+						v-for="(cell, index) in cells" 
+						:key="index"
+						:id="`cell-${index}`"
+						:col-span="cell.colSpan ?? 1"
+						:row-span="cell.rowSpan ?? 1"
+						@click="editCell(index)" />
+				</Layout>
+			</div>
 		</div>
 	</div>
 
@@ -171,10 +173,6 @@ onMounted(() => {
 .container {
 	display: grid;
 	grid-template-columns: auto 1fr;
-}
-.grid-layout {
-	max-height: 90rem;
-	position: relative;
 }
 
 .display {

@@ -10,7 +10,6 @@ const itemEl = ref()
 defineExpose({itemEl})
 
 const handleDragStart = (evt: DragEvent) => {
-  console.log('start', evt)
   evt.dataTransfer?.setData('id', props.id)
 }
 
@@ -18,7 +17,7 @@ const handleDragStart = (evt: DragEvent) => {
 <template>
   <div 
     :id="id"
-    class="drag-item border-rounded-5 p-16" 
+    class="drag-item border-rounded-5 px-16 py-24" 
     :draggable="true" 
     @dragstart="handleDragStart">
     <slot />
@@ -29,17 +28,20 @@ const handleDragStart = (evt: DragEvent) => {
 @use '@/scss/utilities/backgrounds' as *;
 
   .drag-item {
+    display: grid;
     position: relative;
     background-color: #FFFF;
     width: 100%;
     border-radius: 5px;
     margin-bottom: 1.6rem;
-    display: grid;
-    box-shadow: 0 0 23px 6px #ffe1b32b;
+    transform: scale(100%);
+    transition: all 0.2s ease-in-out;
 
     &:hover {
       cursor: grab;
-      @extend .bg-sunset-50;
+      box-shadow: 0 0 35px 0 #0c0c0c;
+      transform: scale(102%);
+
       &::before {
         content: '';
         position: absolute;

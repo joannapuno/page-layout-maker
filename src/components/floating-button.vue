@@ -18,7 +18,7 @@ const expand = ref<boolean>(false)
 
 <template>
   <button 
-    class="lm-fb bg-sunset-500 flex-center gap-8 text-white p-12"
+    class="lm-fb bg-sunset-700 flex-center gap-8 text-white p-12"
     @click="$emit('click', $event)"
     @mouseover="expand = true"
     @mouseleave="expand = false">
@@ -30,8 +30,8 @@ const expand = ref<boolean>(false)
 <style lang="scss" scoped>
   .lm-fb {
     position: fixed;
-    bottom: 1.6rem;
-    right: 1.6rem;
+    bottom: 2.5rem;
+    left: 2.5rem;
     cursor: pointer;
     border-radius: 50px;
 

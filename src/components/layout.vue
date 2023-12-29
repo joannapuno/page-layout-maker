@@ -13,11 +13,8 @@
     rowGap: 0
   })
 
-  const gridLayout = ref<HTMLElement | null>(null)
-
   const layoutClasses = computed(() => {
     return {
-      'grid-layout': true,
       'w-100': true,
       'h-100': true,
       [`grid-${props.columns}`]: true,

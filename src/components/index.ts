@@ -2,6 +2,7 @@ export { default as Button } from './button.vue'
 export { default as InputText } from './input-text.vue'
 export { default as InputNumber } from './input-number.vue'
 export { default as InputSelect } from './input-select.vue'
+export { default as Form } from './form.vue'
 
 // For the app
 export { default as DragItem } from './draggable/drag-item.vue'
