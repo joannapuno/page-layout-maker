@@ -5,7 +5,6 @@ const props = defineProps<{
   id: string
 }>()
 
-const slots = useSlots()
 const itemEl = ref()
 
 defineExpose({itemEl})
@@ -31,6 +30,13 @@ const handleDragStart = (evt: DragEvent) => {
 
   .drag-item {
     position: relative;
+    background-color: #FFFF;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 1.6rem;
+    display: grid;
+    box-shadow: 0 0 23px 6px #ffe1b32b;
+
     &:hover {
       cursor: grab;
       @extend .bg-sunset-50;

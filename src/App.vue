@@ -135,8 +135,8 @@ onMounted(() => {
 	</div>
 
 	<GenerateCodeModal />
-	<Teleport v-if="openCellEdit && selectedCell != null" :to="`#cell-${selectedCell}--display`">
-		<Popover title="Edit Cell" v-model:open="openCellEdit">
+	<Teleport v-if="openCellEdit && selectedCell != null" :to="`#cell-${selectedCell}`">
+		<Popover :title="`Edit Cell # ${selectedCell}`" v-model:open="openCellEdit">
 			<div class="d-flex flex-column gap-8">
 				<InputNumber id="col-span" label="Column Span" v-model="cells[selectedCell].colSpan" :max="12" />
 				<InputNumber id="row-span" label="Row Span" v-model="cells[selectedCell].rowSpan" :max="12" />

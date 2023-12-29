@@ -73,6 +73,12 @@ const cellClasses = computed(() => {
 </template>
 
 <style lang="scss">
+.grid-cell {
+  position: relative;
+  height: 100%;
+  width: 100%;
+} 
+
 .cell-display {
   cursor: pointer;
   border: 2px dashed #e6e6e6;
