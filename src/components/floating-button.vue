@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-const props = withDefaults(defineProps<{
+import { ref } from 'vue'
+withDefaults(defineProps<{
   text: string
   icon?: string
 }>(), {

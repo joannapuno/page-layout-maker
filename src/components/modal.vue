@@ -1,19 +1,17 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
+withDefaults(defineProps<{
+  title: string
+  titleIcon?: string
+  open?: boolean
+}>(), {
+  open: false
+})
 
-  const props = withDefaults(defineProps<{
-    title: string
-    titleIcon?: string
-    open?: boolean
-  }>(), {
-    open: false
-  })
-
-  defineEmits<{
-    (event: 'update:open', value: boolean):void
-  }>()
-
+defineEmits<{
+  (event: 'update:open', value: boolean):void
+}>()
 </script>
+
 <template>
   <Teleport to="body">
     <Transition v-if="open">

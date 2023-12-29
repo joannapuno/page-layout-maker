@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
-import { Popover, InputNumber, Button } from '@/components'
 
 const props = withDefaults(defineProps<{
   id: string

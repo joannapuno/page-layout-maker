@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, useSlots } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps<{
   id: string
