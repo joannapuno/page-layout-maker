@@ -29,10 +29,12 @@ watch(() => props.open, (newVal) => {
 
 <template>
   <Teleport to="body">
-    <div class="lm-toast" :class="{show: isOpen}">
-      <span v-if="icon" :class="icon"></span>
-      <p>{{ message }}</p>
-    </div>
+    <Transition>
+      <div v-if="isOpen" class="lm-toast">
+        <span v-if="icon" :class="icon"></span>
+        <p>{{ message }}</p>
+      </div>
+    </Transition>
   </Teleport>
 </template>
 
@@ -52,11 +54,5 @@ watch(() => props.open, (newVal) => {
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
-    opacity: 0;
-    transition: opacity .1s ease;
-
-    &.show {
-      opacity: 1;
-    }
   }
 </style>

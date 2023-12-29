@@ -29,7 +29,7 @@ watch(() => props.open, (newVal) => {
       <h1 class="text-b-20 mb-24">{{ title }}</h1>
       <slot />
   
-      <div class="d-flex gap-8 mt-24">
+      <div v-if="$slots.buttons" class="d-flex gap-8 mt-24">
         <slot name="buttons" />
       </div>
     </div>      

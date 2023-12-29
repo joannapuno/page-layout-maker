@@ -4,7 +4,13 @@ import { Popover, InputNumber, Button } from '@/components'
 
 const props = withDefaults(defineProps<{
   id: string
-}>(), {})
+  colSpan?: number
+  rowSpan?: number
+
+}>(), {
+  colSpan: 1,
+  rowsSpan: 1,
+})
 
 const emit = defineEmits<{
   (event: 'click', value: Event):void
@@ -39,16 +45,13 @@ const handleDrop = (evt: DragEvent) => {
   copyDragged()
 }
 
-const colSpan = ref<number>(1)
-const rowSpan = ref<number>(1)
-
 const cellClasses = computed(() => {
   return {
     'grid-cell': true,
     'bg-sunset-50': isDraggingOver.value || openPopover.value,
     'has-content': hasContent.value,
-    [`grid-col-span-${colSpan.value}`]: true,
-    [`grid-row-span-${rowSpan.value}`]: true
+    [`grid-col-span-${props.colSpan}`]: true,
+    [`grid-row-span-${props.rowSpan}`]: true
   }
 })
 </script>
@@ -60,15 +63,21 @@ const cellClasses = computed(() => {
     @dragover.prevent
     @dragenter="handleDragEnter"
     @dragleave="isDraggingOver = false"
-    @drop="handleDrop">
+    @drop="handleDrop"
+    @click="$emit('click', $event)">
+
+    <div v-if="!hasContent" class="cell-display flex-center" :id="`${id}--display`">
+      <span class="text-r-14 text-gray-400">Drop component(s) here</span>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
-.grid-cell {
+.cell-display {
   cursor: pointer;
-  &:not(.has-content) {
-    border: 1px dotted #bababa;
-  }
+  border: 2px dashed #e6e6e6;
+  border-radius: 5px;
+  height: 100%;
+  width: 100%;
 }
 </style>

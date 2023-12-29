@@ -35,10 +35,12 @@ const formatCode = async () => {
 }
 
 const openModal = () => {
-  if(!document.getElementById('grid-layout')) return
+	const gridLayout = document.getElementById('grid-layout')
+	
+  if(!gridLayout) return
 
   // TODO: use ref
-  const html = document.getElementById('grid-layout')?.outerHTML
+  const html = gridLayout.outerHTML
   generatedCode.value = html ?? ''
   codeModalOpen.value = true
   formatCode()

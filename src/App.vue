@@ -1,24 +1,25 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick, onUpdated, Ref } from 'vue'
-
-
-
+import { ref, computed, reactive, onMounted, nextTick } from 'vue'
 import { 
 	Cell,
 	Button,  
 	InputNumber, 
 	InputSelect, 
 	Option,
-	Modal,
+	Popover,
 	Layout,
 	ComponentsPanel,
 	GenerateCodeModal } from '@/components'
 
-const cellNum = ref<number>(1)
+interface Cell {
+	colSpan?: number
+	rowSpan?:number
+}
+
 const cols = ref<number>(12)
-const rows = ref<number>(1)
-const colGap = ref<number>(0)
-const rowGap = ref<number>(0)
+const rows = ref<number>(2)
+const colGap = ref<number>(8)
+const rowGap = ref<number>(8)
 const gaps = ref<Option[]>([
 	0,
   2,
@@ -40,9 +41,46 @@ const gaps = ref<Option[]>([
   64,
   68
 ])
+const openCellEdit = ref<boolean>(false)
+const selectedCell = ref<number>(0)
+
 
 // Todo
 // const displayGrid = computed(() => cols.value * rows.value)
+
+const cells = ref<Cell[]>([])
+const addCell = () => {
+	let newCell: Cell = {
+		colSpan: 1,
+		rowSpan: 1
+	}
+	cells.value?.push(newCell)
+}
+
+const editCell = (cell: number) => {
+	openCellEdit.value = true
+	selectedCell.value = cell
+}
+
+const removeCell = () => {
+	openCellEdit.value = false
+	cells.value = cells.value.filter((_, index) => index !== selectedCell.value)
+	selectedCell.value = 0
+}
+
+const addDefaultLayout = () => {
+	const defaultCells: Cell[] = [
+		{ colSpan: 12 },
+		{ colSpan: 6 },
+		{ colSpan: 6 },
+	]
+
+	cells.value = [...defaultCells]
+}
+
+onMounted(() => {
+	addDefaultLayout()
+})
 
 </script>
 
@@ -51,12 +89,9 @@ const gaps = ref<Option[]>([
 		<ComponentsPanel />
 
 		<div class="p-24">
-			<div class="grid-5 gap-8 mb-24">
-				<InputNumber
-					id="cell-num" 
-					label="# of Cells"
-					:max="12"
-					v-model="cellNum" />
+			<div class="grid-5 align-items-end gap-8 mb-24">
+				<Button text="Add Cell" @click="addCell" />
+
 				<InputNumber
 					id="cols" 
 					label="Columns"
@@ -89,12 +124,32 @@ const gaps = ref<Option[]>([
 				:col-gap="colGap"
 				:row-gap="rowGap">
 				<Cell 
-					v-for="cell in cellNum" 
-					:key="cell"
-					:id="`cell-${cell}`"></Cell>
+					v-for="(cell, index) in cells" 
+					:key="index"
+					:id="`cell-${index}`"
+					:col-span="cell.colSpan ?? 1"
+					:row-span="cell.rowSpan ?? 1"
+					@click="editCell(index)" />
 			</Layout>
 		</div>
 	</div>
+
+	<GenerateCodeModal />
+	<Teleport v-if="openCellEdit && selectedCell != null" :to="`#cell-${selectedCell}--display`">
+		<Popover title="Edit Cell" v-model:open="openCellEdit">
+			<div class="d-flex flex-column gap-8">
+				<InputNumber id="col-span" label="Column Span" v-model="cells[selectedCell].colSpan" :max="12" />
+				<InputNumber id="row-span" label="Row Span" v-model="cells[selectedCell].rowSpan" :max="12" />
+				<Button text="Remove Cell" variant="destructive" @click.stop="removeCell" />
+			</div>
+			<!-- <template #buttons>
+				<Button text="Done" @click="openCellEdit = false" />
+			</template> -->
+		</Popover>
+	</Teleport>
+
+
+
 
 
 <!-- For displaying grid lines -->
@@ -110,19 +165,6 @@ const gaps = ref<Option[]>([
 							:id="`cell-${cell}`"></Cell>
 					</Layout> -->
 
-	    <!-- TODO -->
-    <!-- <Popover title="Edit Cell" v-model:open="openPopover">
-      <div class="d-flex flex-column gap-8">
-        <InputNumber id="col-span" label="Column Span" v-model="colSpan" :max="12" />
-        <InputNumber id="row-span" label="Row Span" v-model="rowSpan" :max="12" />
-      </div>
-
-      <template #buttons>
-        <Button text="Done" @click="openPopover = false" />
-      </template>
-    </Popover> -->
-
-	<GenerateCodeModal />
 </template>
 
 <style lang="scss">
