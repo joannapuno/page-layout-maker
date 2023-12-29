@@ -64,7 +64,7 @@ const cellClasses = computed(() => {
     @drop="handleDrop"
     @click="$emit('click', $event)">
 
-    <div v-if="!hasContent" class="cell-display flex-center" :id="`${id}--display`">
+    <div v-if="!hasContent" class="cell-display flex-center p-24" :id="`${id}--display`">
       <span class="text-r-14 text-gray-400">Drop component(s) here</span>
     </div>
   </div>

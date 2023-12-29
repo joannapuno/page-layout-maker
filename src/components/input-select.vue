@@ -1,15 +1,9 @@
 <script setup lang="ts">
-  export interface Option {
-    text?: string
-    value: string | number
-  }
-
-
   withDefaults(defineProps<{
     label: string
     id: string
     modelValue?: string | number
-    options?: Option[]
+    options?: string[] | number[]
   }>(), {
     modelValue: undefined
   })
@@ -33,8 +27,8 @@
       @input="handleInput" 
       class="border-gray-400 border-rounded-5 px-4 py-8">
 
-      <option v-for="(option, index) in options" :key="index" :value="option.value">
-        {{ option.text ?? option }}
+      <option v-for="(option, index) in options" :key="index" :value="option">
+        {{ option }}
       </option>
 
     </select>

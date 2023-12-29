@@ -40,8 +40,11 @@ watch(() => props.open, (newVal) => {
 
 <style lang="scss" scoped>
 .lm-popover {
-    position: fixed;
-    z-index: 10;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 44rem;
+  z-index: 10;
 
   &-content {
     min-width: 25rem;
@@ -49,7 +52,5 @@ watch(() => props.open, (newVal) => {
     box-shadow: 0 0 43px 0 #a165003b
 
   }
-  // top: 0;
-  // left: 100%;
 }
 </style>

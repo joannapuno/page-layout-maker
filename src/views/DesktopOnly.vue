@@ -1,4 +1,3 @@
-<script></script>
 <template>
   <div class="desktop-only">
     <div class="bg-white p-24 border-rounded-5 mx-12">

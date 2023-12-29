@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { ref, computed, reactive, onMounted, nextTick } from 'vue'
+import { ref, onMounted } from 'vue'
 import { 
 	Cell,
 	Button,  
 	InputNumber, 
 	InputSelect, 
-	Option,
 	Popover,
 	Layout,
 	ComponentsPanel,
@@ -20,7 +19,7 @@ const cols = ref<number>(12)
 const rows = ref<number>(2)
 const colGap = ref<number>(8)
 const rowGap = ref<number>(8)
-const gaps = ref<Option[]>([
+const gaps = ref<number[]>([
 	0,
   2,
   4,
@@ -137,7 +136,7 @@ onMounted(() => {
 	</div>
 
 	<GenerateCodeModal />
-	<Teleport v-if="openCellEdit && selectedCell != null" :to="`#cell-${selectedCell}`">
+	<Teleport v-if="openCellEdit && selectedCell != null" to="body">
 		<Popover :title="`Edit Cell # ${selectedCell}`" v-model:open="openCellEdit">
 			<div class="d-flex flex-column gap-8">
 				<InputNumber id="col-span" label="Column Span" v-model="cells[selectedCell].colSpan" :max="12" />
