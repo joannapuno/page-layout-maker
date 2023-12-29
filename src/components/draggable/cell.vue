@@ -49,7 +49,6 @@ const cellClasses = computed(() => {
   return {
     'grid-cell': true,
     'bg-sunset-50': isDraggingOver.value || openPopover.value,
-    'has-content': hasContent.value,
     [`grid-col-span-${props.colSpan}`]: true,
     [`grid-row-span-${props.rowSpan}`]: true
   }

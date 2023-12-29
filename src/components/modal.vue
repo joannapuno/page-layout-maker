@@ -3,6 +3,7 @@
 
   const props = withDefaults(defineProps<{
     title: string
+    titleIcon?: string
     open?: boolean
   }>(), {
     open: false
@@ -19,8 +20,9 @@
       <div class="lm-modal">
           <div class="lm-modal-content bg-white border-rounded-10" v-click-away=" () => $emit('update:open', false)">
             <div class="d-grid gap-24 overflow-y-auto p-24">
-              <div class="lm-modal-title">
-                <h1 class="text-b-20">{{ title }}</h1>
+              <div class="lm-modal-title d-flex align-items-center gap-8 text-sunset-800">
+                <span v-if="titleIcon" :class="titleIcon"></span>
+                <h1 class="text-b-18">{{ title }}</h1>
               </div>
               <slot />
             </div>

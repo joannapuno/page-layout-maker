@@ -83,13 +83,13 @@ const copyCode = async () => {
     icon="fa-solid fa-code" 
     @click="openModal" />
 
-	<Modal title="Generated Code" v-model:open="codeModalOpen">
+	<Modal title="Generated Code" title-icon="fa-solid fa-code" v-model:open="codeModalOpen">
 		<pre class="language-markup d-grid border-rounded-5">
 			<code ref="codeBlock" class="language-markup">{{ generatedCode }}</code>
 		</pre>
 
 		<template #buttons>
-			<Button text="Cancel" @click="codeModalOpen = false" />
+			<Button text="Cancel" @click="codeModalOpen = false" variant="ghost" />
 			<Button text="Copy" @click="copyCode" />
 		</template>
 	</Modal>

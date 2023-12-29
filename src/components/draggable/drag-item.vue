@@ -39,7 +39,6 @@ const handleDragStart = (evt: DragEvent) => {
 
     &:hover {
       cursor: grab;
-      box-shadow: 0 0 35px 0 #0c0c0c;
       transform: scale(102%);
 
       &::before {
