@@ -38,9 +38,30 @@ const openModal = () => {
 	const gridLayout = document.getElementById('grid-layout')
 	
   if(!gridLayout) return
+	const c_gridLayout = gridLayout?.cloneNode(true) as HTMLElement
+
+	//Remove unnecessary attrs
+	c_gridLayout.classList.remove('grid-layout', 'w-100', 'h-100')
+	c_gridLayout.removeAttribute('id')
+
+	if(c_gridLayout.querySelectorAll('.grid-cell').length) {
+		c_gridLayout.querySelectorAll('.grid-cell').forEach(el => {
+			el.classList.remove('grid-cell')
+			el.removeAttribute('id')
+		})
+	}
+
+	//Remove unnecessary els
+	if(c_gridLayout.querySelectorAll('.cell-display').length) {
+		c_gridLayout.querySelectorAll('.cell-display').forEach(el => el.remove())
+	}
+	if(c_gridLayout.querySelectorAll('.lm-popover').length) {
+		c_gridLayout.querySelectorAll('.lm-popover').forEach(el => el.remove())
+	}
 
   // TODO: use ref
-  const html = gridLayout.outerHTML
+  const html = c_gridLayout.outerHTML
+	
   generatedCode.value = html ?? ''
   codeModalOpen.value = true
   formatCode()
@@ -63,11 +84,9 @@ const copyCode = async () => {
     @click="openModal" />
 
 	<Modal title="Generated Code" v-model:open="codeModalOpen">
-		<div>
-      <pre class="language-markup">
-        <code ref="codeBlock" class="language-markup">{{ generatedCode }}</code>
-      </pre>
-		</div>
+		<pre class="language-markup d-grid border-rounded-5">
+			<code ref="codeBlock" class="language-markup">{{ generatedCode }}</code>
+		</pre>
 
 		<template #buttons>
 			<Button text="Cancel" @click="codeModalOpen = false" />
@@ -86,5 +105,6 @@ code[class*="language-"],
 pre[class*="language-"] {
   tab-size: 0;
   white-space: pre-wrap;
+	margin: 0;
 }
 </style>
