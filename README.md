@@ -1,8 +1,6 @@
 # Page Layout Maker (Feat. Grid)
 
-A little sandbox for creating page layouts using CSS tokens and grid components.
-
-🚧 Still under construction 🚧
+This was a simple demo I created to pitch an idea to my team at that time. A little sandbox for creating page layouts using CSS tokens and grid components.
 
 [Demo Link](https://page-layout-maker-rhinou52i-jpuno0909.vercel.app/)
 
