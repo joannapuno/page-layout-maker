@@ -2,7 +2,7 @@
 
 A little sandbox for creating page layouts using CSS tokens and grid components. I created this simple demo to pitch an idea to our Design Systems team at that time.
 
-[Demo Link](https://page-layout-maker-rhinou52i-jpuno0909.vercel.app/)
+[Demo Link](https://page-layout-maker-4qevzxcd8-joanna-punos-projects-e076f681.vercel.app/)
 
 ![Screen Shot 2023-12-29 at 3 56 05 PM](https://github.com/joannapuno/page-layout-maker/assets/43177699/abd04394-60a7-49d9-a3b0-175049ea4375)
 
